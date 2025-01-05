@@ -13,7 +13,7 @@
         <div class="text-center mb-5">
             <img src="/img/Illustration2 3.png" alt="Pason" class="w-36 mx-auto">
         </div>
-        <form class="flex flex-col gap-4" method="POST" action="">
+        <form class="flex flex-col gap-4" method="POST" action="#">
             @csrf
             <h2 class="text-xl font-semibold text-black text-center mb-2">Daftar</h2>
 
@@ -51,7 +51,7 @@
                     class="p-3 border-none rounded-xl text-sm bg-[#DFFCD9] shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 py-2 rounded-full text-sm font-normal w-full">
             </div>
             <div class="flex flex-col mt-6">
-            <button type="submit" class="bg-gradient-to-r from-[#3BE540] to-[#0FB323] text-white py-2 rounded-full text-base font-semibold cursor-pointer hover:bg-gradient-to-r hover:from-[#0FB323] hover:to-[#3BE540] transition duration-300 w-full">
+            <button id="submit" type="submit" class="bg-gradient-to-r from-[#3BE540] to-[#0FB323] text-white py-2 rounded-full text-base font-semibold cursor-pointer hover:bg-gradient-to-r hover:from-[#0FB323] hover:to-[#3BE540] transition duration-300 w-full">
                 Daftar
             </button>
             </div>
@@ -61,5 +61,36 @@
             Sudah punya akun? <a href="/loginmobile" class="text-[#3BE540] font-semibold">Silakan masuk</a>
         </div>
     </div>
+    <script>
+        document.getElementById('submit').addEventListener('click',function (event) {
+            event.preventDefault()
+            const data={
+                "email": "adikamunu@gmail.com",
+                "password":"Adikamunu1234",
+                "role": "client",
+                "name": "adikamunu",
+                "date_birth": "2001-02-15",
+                "gender": "male",
+                "address": "Cicadas",
+                "phone": "082299008023"
+            }
+        fetch('http://127.0.0.1:1337/api/userapps',{
+            method:'POST',
+            body:JSON.stringify ({
+                data
+
+            }),
+            headers:{
+                "content-type":"application/json"
+            }
+        }).then(function (respons) {
+            return respons.json()
+        }).then(function (result) {
+            console.log(result)
+        }).catch(function (error) {
+            console.log(error)
+        })
+        })
+    </script>
 </body>
 </html>
