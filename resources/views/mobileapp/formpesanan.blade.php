@@ -14,7 +14,7 @@
     <div class="w-full max-w-[375px] h-[812px] bg-white rounded-[20px] shadow-lg overflow-hidden relative flex flex-col">
         <!-- Gambar Header -->
         <div class="relative">
-            <img src="/img/640-vegetable-and-herb-pile-of-water-spinach-or-ipomoea-aquatica-selling-at-fresh-market-in-indonesian-it-is-called-kangkung-dfd91bf15551cc4a39deb2d33910fe0a-20d6a116be547391129088e1f2ef936c_600x400.jpg" alt="Header Image" class="w-full h-56 object-cover rounded-tl-[20px] rounded-tr-[20px]">
+            <img src="" alt="Header Image" class="w-full h-56 object-cover rounded-tl-[20px] rounded-tr-[20px]">
         </div>
         <!-- Konten Pesanan -->
         <div class="p-5 flex-1">
@@ -43,7 +43,7 @@
                 <!-- Produk Item -->
                 <div class="bg-green-50 border border-green-300 p-4 rounded-lg flex items-center justify-between mb-4">
                     <div class="flex items-center space-x-4">
-                        <img src="/img/640-vegetable-and-herb-pile-of-water-spinach-or-ipomoea-aquatica-selling-at-fresh-market-in-indonesian-it-is-called-kangkung-dfd91bf15551cc4a39deb2d33910fe0a-20d6a116be547391129088e1f2ef936c_600x400.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
+                        <img src="" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
                         <div>
                             <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
                             <p class="text-xs text-gray-500">Toko Ahmad</p>
