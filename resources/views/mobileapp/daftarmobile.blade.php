@@ -61,36 +61,78 @@
             Sudah punya akun? <a href="/loginmobile" class="text-[#3BE540] font-semibold">Silakan masuk</a>
         </div>
     </div>
-    <script>
-        document.getElementById('submit').addEventListener('click',function (event) {
-            event.preventDefault()
-            const data={
-                "email": "adikamunu@gmail.com",
-                "password":"Adikamunu1234",
-                "role": "client",
-                "name": "adikamunu",
-                "date_birth": "2001-02-15",
-                "gender": "male",
-                "address": "Cicadas",
-                "phone": "082299008023"
-            }
-        fetch('http://127.0.0.1:1337/api/userapps',{
-            method:'POST',
-            body:JSON.stringify ({
-                data
 
-            }),
-            headers:{
-                "content-type":"application/json"
-            }
-        }).then(function (respons) {
-            return respons.json()
-        }).then(function (result) {
-            console.log(result)
-        }).catch(function (error) {
-            console.log(error)
-        })
-        })
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                // Get form values
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    address: document.getElementById('address').value,
+                    role: document.getElementById('role').value,
+                    password: document.getElementById('password').value
+                };
+
+                // Basic validation
+                if (!formData.email || !formData.password || !formData.name || !formData.phone || !formData.address || !formData.role) {
+                    alert('Mohon isi semua field yang diperlukan');
+                    return;
+                }
+
+                // Prepare data for Strapi
+                const strapiData = {
+                    data: {
+                        email: formData.email,
+                        password: formData.password,
+                        role: formData.role === 'penjual' ? 'seller' : 'client',
+                        name: formData.name,
+                        date_birth: "2001-02-15",
+                        gender: "male",
+                        address: formData.address,
+                        phone: formData.phone
+                    }
+                };
+
+                try {
+                    // Show loading state
+                    const submitButton = document.getElementById('submit');
+                    submitButton.textContent = 'Mendaftar...';
+                    submitButton.disabled = true;
+
+                    // Send to Strapi
+                    const response = await fetch('http://127.0.0.1:1337/api/userapps', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(strapiData)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        alert('Pendaftaran berhasil!');
+                        window.location.href = '/loginmobile';
+                    } else {
+                        throw new Error(result.error?.message || 'Terjadi kesalahan saat mendaftar');
+                    }
+                } catch (error) {
+                    console.error('Registration error:', error);
+                    alert(error.message || 'Terjadi kesalahan saat mendaftar');
+                } finally {
+                    // Reset button state
+                    const submitButton = document.getElementById('submit');
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Daftar';
+                }
+            });
+        });
     </script>
 </body>
 </html>
