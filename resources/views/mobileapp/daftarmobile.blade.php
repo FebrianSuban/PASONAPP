@@ -77,36 +77,35 @@
             Sudah punya akun? <a href="/loginmobile" class="text-[#3BE540] font-semibold">Silakan masuk</a>
         </div>
     </div>
-
     <script>
-        document.getElementById('submit').addEventListener('click',function (event) {
+        // console.log(form); // coba di console aja
+        document.getElementById('submit').addEventListener('click', function(event) {
             event.preventDefault()
-            const data={
-                "email": "adikamunu@gmail.com",
-                "password":"Adikamunu1234",
-                "role": "client",
-                "name": "adikamunu",
-                "date_birth": "2001-02-15",
-                "gender": "male",
-                "address": "Cicadas",
-                "phone": "082299008023"
-            }
-        fetch('http://127.0.0.1:1337/api/userapps',{
-            method:'POST',
-            body:JSON.stringify ({
-                data
-
-            }),
-            headers:{
-                "content-type":"application/json"
-            }
-        }).then(function (respons) {
-            return respons.json()
-        }).then(function (result) {
-            console.log(result)
-        }).catch(function (error) {
-            console.log(error)
-        })
+            const register_form = document.querySelectorAll('#register-form input,select');
+            console.log(Array.from(register_form)); // coba di console aja bro :v
+            const form = {}
+            Array.from(register_form).forEach(function(input) {
+                if (input.id) {
+                    form[input.id] = input.value
+                }
+            });
+            // const email = document.querySelector('#email').value;
+            
+            fetch('http://127.0.0.1:1337/api/userapps', {
+                method: 'POST',
+                body: JSON.stringify({
+                    data: form
+                }),
+                headers: {
+                    "content-type": "application/json"
+                }
+            }).then(function(respons) {
+                return respons.json()
+            }).then(function(result) {
+                console.log(result)
+            }).catch(function(error) {
+                console.log(error)
+            })
         })
     </script>
 </body>
