@@ -1,263 +1,270 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PASON App</title>
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-        rel="stylesheet" />
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ mix('resources/css/app.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100">
     <div class="max-w-sm mx-auto bg-white min-h-screen relative pb-20">
         <!-- Header -->
         <div class="flex items-center justify-between p-4 bg-white">
-            <img
-                src="/img/Illustration2 3.png"
-                alt="Logo Pason"
-                class="w-25 h-10" />
+            <img src="/img/Illustration2 3.png" alt="Logo Pason" class="w-24 h-10 object-contain" />
             <div class="text-right pr-3">
                 <i class="fas fa-bell text-green-500 text-2xl"></i>
             </div>
         </div>
 
-        <!-- Banner Diskon -->
-        <div class="bg-white p-5">
-            <div
-                class="bg-green-500 rounded-lg flex items-center justify-between p-4">
-                <div class="text-white text-sm">
-                    <p>DISKON<br />12.12.2024</p>
-                </div>
-                <div
-                    class="bg-[#1E7D34] rounded-full h-15 w-15 flex justify-center items-center">
-                    <img
-                        src="/img/Illustration2 8.png"
-                        alt="Foto Banner"
-                        class="w-full h-full mt-[-10px]" />
-                </div>
+         <!-- Banner Diskon -->
+         <div class="bg-white p-5">
+         <div class="bg-green-500 rounded-lg flex items-center justify-between p-4">
+            <div class="text-white text-sm">
+                <p class="font-bold">DISKON<br />12.12.2024</p>
             </div>
+            <div class="bg-[#1E7D34] rounded-full h-15 w-15 flex justify-center items-center">
+                <img
+                    src="/img/Illustration2 8.png"
+                    alt="Foto Banner"
+                    class="w-full h-full mt-[-10px]" />
+            </div>
+        </div>
+        </div>
+
+
+        <!-- <div class="mb-4 w-1/2 md:w-1/2 px-5">
+            <label class="block text-gray-600 text-sm font-medium mb-1">Filter</label>
+            <select class="w-full bg-green-50 text-green-600 py-2 px-3 rounded-lg border border-green-300">
+                <option>Sayur Hijau</option>
+                <option>Buah Segar</option>
+                <option>Daging</option>
+            </select>
+        </div> -->
+
+        <div class="flex flex-col px-5">
+        <!-- Teks "Produk Kami" -->
+        <div class="text-left mb-2">
+            <h2 class="text-lg font-bold text-gray-700">Produk Kami</h2>
+        </div>
+
+        <!-- Pilihan Kategori -->
+        <div class="w-auto">
+            <select class="w-auto bg-green-50 text-green-600 py-1 px-2 rounded-lg border border-green-300">
+                <option>Buah</option>
+                <option>Sayur</option>
+                <option>Daging</option>
+                <option>Bumbu Dapur</option>
+                <option>Sembako</option>
+            </select>
+        </div>
         </div>
 
         <!-- Daftar Produk -->
-        <div class="grid grid-cols-2 gap-4 p-5" id="product-list">
-            <!-- Kartu Produk -->
-            {{-- <div
-                class="product-card bg-[#E9F5E9] rounded-lg p-4 cursor-pointer"
-                data-title="Sayur Kangkung"
-                data-description="Sayur kangkung segar, cocok untuk berbagai masakan. Harga terjangkau!">
-                <div class="rounded-lg">
-                    <img
-                        src=""
-                        alt="Foto Produk"
-                        class="w-full rounded-lg" />
-                </div>
-                <div class="text-left mt-2">
-                    <p
-                        class="font-bold text-sm text-gray-500"
-                        style="font-family: 'Lato', sans-serif">
-                        Sayur Kangkung
-                    </p>
-                    <small class="text-[#7A7A7A]"><strong>Rp 6.200</strong><br />Toko Ahmad
-                        <br />Rating
-                        <i class="fas fa-star text-yellow-500"></i>
-                        <i class="fas fa-star text-yellow-500"></i>
-                        <i class="fas fa-star text-grey-500"></i>
-                    </small>
-                </div>
-            </div> --}}
+        <div class="grid grid-cols-2 gap-4 p-5" id="product-list"></div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between px-5 py-1">
+            <button onclick="onPrev()" class="px-2 py-1 bg-gradient-to-r from-green-500 to-green-700 text-white text-xs font-medium rounded-full shadow-lg transform transition duration-300 hover:scale-105 flex items-center">
+                <i class="fas fa-chevron-left mr-1"></i>
+                Previous
+            </button>
+            <button onclick="onNext()" class="px-2 py-1 bg-gradient-to-r from-green-500 to-green-700 text-white text-xs font-medium rounded-full shadow-lg transform transition duration-300 hover:scale-105 flex items-center">
+                Next
+                <i class="fas fa-chevron-right ml-1"></i>
+            </button>
         </div>
 
-        <button onclick="onPrev()">Previous</button>
-        <button onclick="onNext()">Next</button>
 
         <!-- Footer Navigasi -->
-        <div
-            class="flex flex-row justify-between items-center bg-white py-4 px-4 sticky bottom-0 w-full z-100 fixed">
-            <div
-                class="text-center cursor-pointer flex flex-col items-center"
-                onclick="redirectToPage()">
+        <div class="flex flex-row justify-between items-center bg-white py-4 px-8 fixed bottom-0 w-full max-w-sm mx-auto border-t">
+            <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage()">
                 <i class="fas fa-home text-green-500 mb-1"></i>
                 <span class="text-green-500 text-xs">Beranda</span>
             </div>
-            <div
-                class="text-center cursor-pointer flex flex-col items-center"
-                onclick="redirectToPage1()">
-                <i class="fas fa-history text-green-500 mb-1"></i>
+            <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage1()">
+          <i class="fas fa-history text-green-500 mb-1"></i>
                 <span class="text-green-500 text-xs">Jadwal</span>
             </div>
-            <div
-                class="text-center cursor-pointer flex flex-col items-center"
-                onclick="redirectToPage2()">
+            <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage2()">
                 <i class="fas fa-shopping-cart text-green-500 mb-1"></i>
                 <span class="text-green-500 text-xs">Keranjang</span>
             </div>
-            <div
-                class="text-center cursor-pointer flex flex-col items-center"
-                onclick="redirectToPage3()">
+            <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage3()">
                 <i class="fas fa-user text-green-500 mb-1"></i>
                 <span class="text-green-500 text-xs">Akun</span>
             </div>
         </div>
 
         <!-- Modal -->
-        <div
-            id="productModal"
-            class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div class="bg-white rounded-lg p-4 max-w-xs w-full">
+        <div id="productModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div class="bg-white rounded-lg p-4 max-w-xs w-full m-4">
                 <div class="flex justify-end">
-                    <button
-                        onclick="closeModal()"
-                        class="text-gray-500 text-xl">
-                        &times;
-                    </button>
+                    <button onclick="closeModal()" class="text-gray-500 text-xl">&times;</button>
                 </div>
                 <div class="text-center">
-                    <img
-                        id="modalImage"
-                        src=""
-                        alt="Product Image"
-                        class="rounded-lg w-full h-24 object-cover mb-3" />
-                    <h3
-                        id="modalTitle"
-                        class="font-semibold text-base mb-1">
-                        Nama Produk
-                    </h3>
-                    <p
-                        id="modalDescription"
-                        class="text-gray-700 text-xs mb-3">
-                        Deskripsi produk akan ditampilkan di sini.
-                    </p>
+                    <img id="modalImage" src="" alt="Product Image" class="rounded-lg w-full h-48 object-cover mb-3" />
+                    <h3 id="modalTitle" class="font-semibold text-base mb-1">Nama Produk</h3>
+                    <p id="modalPrice" class="text-gray-700 text-sm mb-2"></p>
+                    <p id="modalDescription" class="text-gray-600 text-xs mb-3">Deskripsi produk akan ditampilkan di sini.</p>
                 </div>
-                <button
-                    onclick="closeModal()"
-                    class="w-full bg-green-500 text-white py-1 rounded-lg">
-                    beli
+                <button onclick="closeModal()" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-200">
+                    Beli
                 </button>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
     <script>
         // Redirect functions
         function redirectToPage() {
             window.location.href = "/dashboardmobile";
         }
-
         function redirectToPage1() {
             window.location.href = "/pesanansaya";
         }
-
         function redirectToPage2() {
             window.location.href = "/formpesanan";
         }
-
         function redirectToPage3() {
             window.location.href = "/profilsaya";
         }
 
-        // Modal functions
-        function openModal(image, title, description) {
-            document.getElementById("modalImage").src = image;
-            document.getElementById("modalTitle").innerText = title;
-            document.getElementById("modalDescription").innerText =
-                description;
-            document
-                .getElementById("productModal")
-                .classList.remove("hidden");
+        function openModal(product) {
+            document.getElementById("modalImage").src = `http://127.0.0.1:1337${product.picture?.url}`;
+            document.getElementById("modalTitle").innerText = product.name_product;
+            document.getElementById("modalPrice").innerText = `Rp ${product.price?.toLocaleString()}/kg`;
+            document.getElementById("modalDescription").innerText = `Stok Barang: 30`;
+            document.getElementById("productModal").classList.remove("hidden");
         }
 
         function closeModal() {
             document.getElementById("productModal").classList.add("hidden");
         }
 
-        // Add event listeners to product cards
-        document.querySelectorAll(".product-card").forEach((card) => {
-            card.addEventListener("click", function() {
-                const image = this.getAttribute("data-image");
-                const title = this.getAttribute("data-title");
-                const description = this.getAttribute("data-description");
-                openModal(image, title, description);
-            });
-        });
+        // Product grid handling
+        // const parentGrid = document.getElementById('product-list');
+        // let pages = 1;
 
-        // panggil DOM untuk parent grid nya
-        const parentGrid = document.getElementById('product-list')
-        
+        // function onNext() {
+        //     pages++;
+        //     parentGrid.innerHTML = "";
+        //     getProducts();
+        // }
+
+        // function onPrev() {
+        //     if (pages > 1) {
+        //         pages--;
+        //         parentGrid.innerHTML = "";
+        //         getProducts();
+        //     }
+        // }
+
+        // function getProducts() {
+        //     axios.get(`http://127.0.0.1:1337/api/products?pagination[page]=${pages}&pagination[pageSize]=50&populate=*&sort=name_product:asc`)
+        //         .then(function(response) {
+        //             const data = response.data.data;
+        //             data.forEach(item => {
+        //                 parentGrid.innerHTML += `
+        //                     <div class="bg-[#E9F5E9] rounded-lg p-4 cursor-pointer" onclick="openModal(${JSON.stringify(item).replace(/"/g, '&quot;')})">
+        //                         <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg">
+        //                             <img src="http://127.0.0.1:1337${item?.picture?.url}"
+        //                                  alt="${item.name_product}"
+        //                                  class="h-32 w-full object-cover rounded-lg" />
+        //                         </div>
+        //                         <div class="mt-2">
+        //                             <p class="font-bold text-sm text-gray-500 font-lato">
+        //                                 ${item.name_product}
+        //                             </p>
+        //                             <div class="text-[#7A7A7A] text-xs">
+        //                                 <p class="font-bold">Rp ${item.price?.toLocaleString()}/kg</p>
+        //                                 <p>Toko Ahmad</p>
+        //                                 <div class="flex items-center">
+        //                                     <span>Rating</span>
+        //                                     ${Array(5).fill('').map((_, i) => `
+        //                                         <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
+        //                                     `).join('')}
+        //                                 </div>
+        //                                 <p class="text-xs mt-1">Stok Barang: 30</p>
+        //                             </div>
+        //                         </div>
+        //                     </div>
+        //                 `;
+        //             });
+        //         })
+        //         .catch(function(error) {
+        //             console.error('Error fetching products:', error);
+        //         });
+        // }
+
+        // getProducts();
+
+        const parentGrid = document.getElementById('product-list');
         let pages = 1;
+        const pageSize = 10;
+
         function onNext() {
             pages++;
             parentGrid.innerHTML = "";
             getProducts();
         }
+
         function onPrev() {
-            pages--;
-            parentGrid.innerHTML = "";
-            getProducts();
+            if (pages > 1) {
+                pages--;
+                parentGrid.innerHTML = "";
+                getProducts();
+            }
         }
 
         function getProducts() {
-            axios
-                .get(`http://127.0.0.1:1337/api/products?pagination[page]=${pages}&pagination[pageSize]=50&populate=*&sort=name_product:asc`)
-                .then(function(response) {
-                    // handle success
-                    const data = response.data.data // ambil response yang bentuknya array
-                    console.log(data)
-                    // looping array pake .map
-                    data.map(item => {
-                        console.log(item.name_product);
-                        // append html product card
-                        parentGrid.innerHTML += `
-                                <div
-                        class="product-card bg-[#E9F5E9] rounded-lg p-4 cursor-pointer"
-                        data-title="Sayur Kangkung"
-                        data-description="Sayur kangkung segar, cocok untuk berbagai masakan. Harga terjangkau!"
-                    >
-                        <div class="rounded-lg">
-                            <img
-                                src=http://127.0.0.1:1337${item?.picture?.url}
-                                alt="Foto Produk"
-                                class="w-full rounded-lg"
-                            />
-                        </div>
-                        <div class="text-left mt-2">
-                            <p
-                                class="font-bold text-sm text-gray-500"
-                                style="font-family: 'Lato', sans-serif"
-                            >
-                                ${item.name_product}
-                            </p>
-                            <small class="text-[#7A7A7A]"
-                                ><strong>Rp 6.200</strong><br />Toko Ahmad
-                                <br />Rating
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <i class="fas fa-star text-grey-500"></i>
-                            </small>
-                        </div>
-                    </div>
-                            `
-                    })
+            const apiURL = `http://127.0.0.1:1337/api/products?pagination[page]=${pages}&pagination[pageSize]=${pageSize}&populate=*&sort=name_product:asc`;
+            axios.get(apiURL)
+                .then(response => {
+                    const data = response.data.data;
+                    parentGrid.innerHTML = "";
+
+                    if (data.length === 0) {
+                        parentGrid.innerHTML = `<p class="text-gray-500 text-center mt-4">Tidak ada produk yang tersedia.</p>`;
+                    } else {
+                        data.forEach(item => {
+                            parentGrid.innerHTML += `
+                                <div class="bg-[#E9F5E9] rounded-lg p-4 cursor-pointer" onclick="openModal(${JSON.stringify(item).replace(/"/g, '&quot;')})">
+                                    <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg">
+                                        <img src="http://127.0.0.1:1337${item?.picture?.url}"
+                                            alt="${item.name_product}"
+                                            class="h-32 w-full object-cover rounded-lg" />
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="font-bold text-sm text-gray-500 font-lato">
+                                            ${item.name_product}
+                                        </p>
+                                        <div class="text-[#7A7A7A] text-xs">
+                                            <p class="font-bold">Rp ${item.price?.toLocaleString()}/kg</p>
+                                            <p>Toko Ahmad</p>
+                                            <div class="flex items-center">
+                                                <span>Rating</span>
+                                                ${Array(5).fill('').map((_, i) => `
+                                                    <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
+                                                `).join('')}
+                                            </div>
+                                            <p class="text-xs mt-1">Stok Barang: 30</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    }
                 })
-                .catch(function(error) {
-                    // handle error
-                    console.log(error);
-                })
-                .finally(function() {
-                    // always executed
+                .catch(error => {
+                    console.error('Error fetching products:', error);
                 });
         }
-
-        getProducts(); // panggil function getProducts() ketika halaman dimuat
+        getProducts();
     </script>
 </body>
-
 </html>

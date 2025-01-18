@@ -9,9 +9,9 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('resources/css/app.css') }}">
 </head>
-<body class="bg-white flex justify-center items-center min-h-screen">
+<body class="bg-gray-100">
     <!-- Container Utama -->
-    <div class="w-full max-w-[375px] h-[812px] bg-white rounded-[20px] shadow-lg overflow-hidden relative flex flex-col">
+    <div class="max-w-sm mx-auto bg-white min-h-screen relative pb-20">
         <!-- Gambar Header -->
         <div class="relative">
             <img src="" alt="Header Image" class="w-full h-56 object-cover rounded-tl-[20px] rounded-tr-[20px]">
@@ -80,24 +80,24 @@
         </div>
         <!-- Footer Navigasi -->
           <!-- Footer Navigasi -->
-          <div class="flex flex-row justify-between items-center bg-white py-4 px-4 sticky bottom-0 w-full z-100 fixed">
-        <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage()">
-            <i class="fas fa-home text-green-500 mb-1"></i>
-            <span class="text-green-500 text-xs">Beranda</span>
+          <div class="flex flex-row justify-between items-center bg-white py-4 px-8 fixed bottom-0 w-full max-w-sm mx-auto border-t">
+            <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage()">
+                <i class="fas fa-home text-green-500 mb-1"></i>
+                <span class="text-green-500 text-xs">Beranda</span>
+            </div>
+            <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage1()">
+                <i class="fas fa-history text-green-500 mb-1"></i>
+                <span class="text-green-500 text-xs">Jadwal</span>
+            </div>
+            <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage2()">
+                <i class="fas fa-shopping-cart text-green-500 mb-1"></i>
+                <span class="text-green-500 text-xs">Keranjang</span>
+            </div>
+            <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage3()">
+                <i class="fas fa-user text-green-500 mb-1"></i>
+                <span class="text-green-500 text-xs">Akun</span>
+            </div>
         </div>
-        <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage1()">
-            <i class="fas fa-history text-green-500 mb-1"></i>
-            <span class="text-green-500 text-xs">Jadwal</span>
-        </div>
-        <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage2()">
-            <i class="fas fa-shopping-cart text-green-500 mb-1"></i>
-            <span class="text-green-500 text-xs">Keranjang</span>
-        </div>
-        <div class="text-center cursor-pointer flex flex-col items-center" onclick="redirectToPage3()">
-            <i class="fas fa-user text-green-500 mb-1"></i>
-            <span class="text-green-500 text-xs">Akun</span>
-        </div>
-    </div>
     </div>
 
     <script>

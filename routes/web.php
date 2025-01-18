@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AuthController;
 
 
 
@@ -13,6 +14,17 @@ Route::get('/', function () {
 Route::get('/dashboardmobile', function () {
     return view('mobileapp.dasboard-mobile');
 });
+
+// Route::get('/loginmobile', function () {
+//     return view('mobileapp.loginmobile'); // Halaman login
+// })->name('login');
+
+// Route::post('/loginmobile', [AuthController::class, 'login'])->name('login.post'); // Menggunakan POST untuk login
+
+// Route::get('/dashboardmobile', function () {
+//     return view('mobileapp.dasboard-mobile'); // Halaman dashboard
+// })->name('dashboard')->middleware('auth');
+
 
 Route::get('/loginmobile', function () {
     return view('mobileapp.loginmobile');

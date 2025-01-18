@@ -37,6 +37,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const loginForm = document.getElementById('loginForm');
@@ -60,19 +61,13 @@
                     loginButton.disabled = true;
 
                     // Send login request to Strapi
-                    const response = await fetch('http://127.0.0.1:1337/api/auth/local', {
-                        method: 'POST',
+                    const response = await fetch(`http://localhost:1337/api/userapps?filters[email][$eq]=${email}`, {
+                        method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json'
                         },
-                        credentials: 'include',
-                        body: JSON.stringify({
-                            identifier: email,
-                            password: password
-                        })
                     });
-
 
                     const data = await response.json();
 
@@ -84,7 +79,7 @@
                         // Successful login
                         console.log('Login successful:', data);
                         alert('Login berhasil!');
-                        window.location.href = '/dashbordmobile';
+                        window.location.href = '/dashboardmobile';
                     } else {
                         // Handle specific error messages
                         let errorMessage = 'Email atau kata sandi salah';
