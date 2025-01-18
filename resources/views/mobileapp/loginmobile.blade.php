@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('resources/css/app.css') }}">
 </head>
+
 <body class="font-lato bg-white overflow-hidden">
     <div class="max-w-sm mx-auto min-h-screen flex flex-col justify-center relative p-5 bg-white rounded-3xl shadow-lg">
         <div class="text-center mb-5">
@@ -24,7 +26,8 @@
                     class="p-3 border-none rounded-xl text-sm bg-[#DFFCD9] shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 py-2 rounded-full text-sm font-normal w-full">
             </div>
             <div class="flex flex-col mt-6">
-                <button type="submit" id="loginButton" class="bg-gradient-to-r from-[#3BE540] to-[#0FB323] text-white py-2 rounded-full text-base font-semibold cursor-pointer hover:bg-gradient-to-r hover:from-[#0FB323] hover:to-[#3BE540] transition duration-300 w-full">
+                <button type="submit" id="loginButton"
+                    class="bg-gradient-to-r from-[#3BE540] to-[#0FB323] text-white py-2 rounded-full text-base font-semibold cursor-pointer hover:bg-gradient-to-r hover:from-[#0FB323] hover:to-[#3BE540] transition duration-300 w-full">
                     Masuk
                 </button>
             </div>
@@ -37,11 +40,13 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const loginForm = document.getElementById('loginForm');
 
-            loginForm.addEventListener('submit', async function(event) {
+            loginForm.addEventListener('submit', async function (event) {
                 event.preventDefault();
 
                 const email = document.getElementById('email').value;
@@ -59,50 +64,49 @@
                     loginButton.textContent = 'Masuk...';
                     loginButton.disabled = true;
 
-                    // Send login request to Strapi
-                    const response = await fetch('http://127.0.0.1:1337/api/auth/local', {
-                        method: 'POST',
+                    // Fetch user data
+                    const response = await fetch(`http://127.0.0.1:1337/api/userapps?filters[email][$eq]=${email}`, {
+                        method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json'
                         },
-                        credentials: 'include',
-                        body: JSON.stringify({
-                            identifier: email,
-                            password: password
-                        })
                     });
 
-
                     const data = await response.json();
+                    console.log(data);
 
-                    if (response.ok) {
-                        // Store auth data
-                        localStorage.setItem('jwt', data.jwt);
-                        localStorage.setItem('user', JSON.stringify(data.user));
-
-                        // Successful login
-                        console.log('Login successful:', data);
-                        alert('Login berhasil!');
-                        window.location.href = '/dashbordmobile';
-                    } else {
-                        // Handle specific error messages
-                        let errorMessage = 'Email atau kata sandi salah';
-
-                        if (data.error) {
-                            switch (data.error.message) {
-                                case 'Invalid identifier or password':
-                                    errorMessage = 'Email atau kata sandi tidak valid';
-                                    break;
-                                case 'User not found':
-                                    errorMessage = 'Email tidak terdaftar';
-                                    break;
-                                default:
-                                    errorMessage = data.error.message;
-                            }
-                        }
-                        throw new Error(errorMessage);
+                    // Check if user exists
+                    if (data.data.length === 0) {
+                        throw new Error('Email tidak terdaftar');
                     }
+
+                    var bcrypt = dcodeIO.bcrypt;
+
+                    const user = data.data[0];
+                    const storedHash = user.password;
+
+                    // Compare password using bcrypt
+                    bcrypt.compare(password, storedHash, function (err, isMatch) {
+                        if (err) {
+                            throw new Error('Terjadi kesalahan saat verifikasi password');
+                        }
+
+                        if (isMatch) {
+                            // Successful login
+                            console.log('Login successful:', user);
+                            alert('Login berhasil!');
+                            // Store user data (except password) in localStorage
+                            const userData = { ...user };
+                            delete userData.password;
+                            localStorage.setItem('user', JSON.stringify(userData));
+                            window.location.href = '/dashboardmobile';
+                        } else {
+                            alert('Kata sandi salah');
+                            throw new Error('Kata sandi salah');
+                        }
+                    });
+
                 } catch (error) {
                     console.error('Login error:', error);
                     alert(error.message);
@@ -115,4 +119,5 @@
         });
     </script>
 </body>
+
 </html>

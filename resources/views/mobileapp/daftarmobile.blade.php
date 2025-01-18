@@ -67,7 +67,8 @@
                     class="p-3 border-none rounded-xl text-sm bg-[#DFFCD9] shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 py-2 rounded-full text-sm font-normal w-full">
             </div>
             <div class="flex flex-col mt-6">
-                <button id="submit" type="submit" class="bg-gradient-to-r from-[#3BE540] to-[#0FB323] text-white py-2 rounded-full text-base font-semibold cursor-pointer hover:bg-gradient-to-r hover:from-[#0FB323] hover:to-[#3BE540] transition duration-300 w-full">
+                <button id="submit" type="submit"
+                    class="bg-gradient-to-r from-[#3BE540] to-[#0FB323] text-white py-2 rounded-full text-base font-semibold cursor-pointer hover:bg-gradient-to-r hover:from-[#0FB323] hover:to-[#3BE540] transition duration-300 w-full">
                     Daftar
                 </button>
             </div>
@@ -77,20 +78,37 @@
             Sudah punya akun? <a href="/loginmobile" class="text-[#3BE540] font-semibold">Silakan masuk</a>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+
     <script>
         // console.log(form); // coba di console aja
-        document.getElementById('submit').addEventListener('click', function(event) {
+        document.getElementById('submit').addEventListener('click', function (event) {
             event.preventDefault()
             const register_form = document.querySelectorAll('#register-form input,select');
             console.log(Array.from(register_form)); // coba di console aja bro :v
             const form = {}
-            Array.from(register_form).forEach(function(input) {
+            var bcrypt = dcodeIO.bcrypt;
+            var salt = bcrypt.genSaltSync(10);
+            var hashPassword = ''
+            Array.from(register_form).forEach(function (input) {
                 if (input.id) {
-                    form[input.id] = input.value
+                    // cek jika input id terdapat password
+                    // maka password tersebut dihasing
+                    if (input.id === 'password') {
+                        // proses hashing password
+                        // console.log("MASUK SINI", input.value, input.id)
+                        hashPassword = bcrypt.hashSync(input.value, salt);
+                        // console.log("MASUK SINI hashed", hashPassword, input.id)
+                        form[input.id] = hashPassword
+                    } else {
+                        form[input.id] = input.value
+                    }
                 }
             });
             // const email = document.querySelector('#email').value;
-            
+            console.log(form); // coba di email
+
             fetch('http://127.0.0.1:1337/api/userapps', {
                 method: 'POST',
                 body: JSON.stringify({
@@ -99,11 +117,12 @@
                 headers: {
                     "content-type": "application/json"
                 }
-            }).then(function(respons) {
+            }).then(function (respons) {
                 return respons.json()
-            }).then(function(result) {
+            }).then(function (result) {
+                window.location.href = "/loginmobile";
                 console.log(result)
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log(error)
             })
         })
