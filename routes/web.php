@@ -11,6 +11,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/dashboard_admin', function () {
+    return view('adminapp.dasboard_admin');
+});
+
+
 Route::get('/dashboardmobile', function () {
     return view('mobileapp.dasboard-mobile');
 });
@@ -69,3 +75,5 @@ Route::get('/pesanansaya', function () {
 Route::get('/profilsaya', function () {
     return view('mobileapp.profil');
 });
+
+
