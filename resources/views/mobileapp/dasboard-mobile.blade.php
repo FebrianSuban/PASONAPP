@@ -135,11 +135,11 @@
             window.location.href = "/profilsaya";
         }
 
-        function openModal(product) {
-            document.getElementById("modalImage").src = `http://127.0.0.1:1337${product.picture?.url}`;
-            document.getElementById("modalTitle").innerText = product.name_product;
-            document.getElementById("modalPrice").innerText = `Rp ${product.price?.toLocaleString()}/kg`;
-            document.getElementById("modalDescription").innerText = `Stok Barang: 30`;
+        function openModal(item) {
+            document.getElementById("modalImage").src = `http://127.0.0.1:1337${item.product.picture?.url}`;
+            document.getElementById("modalTitle").innerText = item.product.name_product;
+            document.getElementById("modalPrice").innerText = `Rp ${item.price}/kg`;
+            document.getElementById("modalDescription").innerText = item.stock;
             document.getElementById("productModal").classList.remove("hidden");
         }
 
@@ -210,8 +210,8 @@
                             <div class="flex items-center">
                                 <span>Rating</span>
                                 ${Array(5).fill('').map((_, i) => `
-                                                                                                                                                                                                                                                                                                            <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
-                                                                                                                                                                                                                                                                                                        `).join('')}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    `).join('')}
                             </div>
                             <p class="text-xs mt-1">${item.stock}</p>
                         </div>
