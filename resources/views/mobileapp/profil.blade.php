@@ -50,7 +50,7 @@
                 <span class="w-2/3 text-gray-800" data-email>Loading...</span>
             </div>
         </div>
-        <div class="bg-green-100 rounded-2xl p-5 mx-5 mt-20">
+        <div class="bg-green-100 rounded-2xl p-5 mx-5 mt-20" id="order&rating">
             <table class="w-full mb-4">
                 <thead>
                     <tr>
@@ -64,13 +64,6 @@
                     <tr>
                         <th class="text-left font-semibold text-gray-600">Rating Akun</th>
                         <th class="text-right text-gray-800" data-rating>Loading...</th>
-                        {{-- <th class="text-right text-gray-800">
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-gray-500"></i>
-                            <i class="fas fa-star text-gray-500"></i>
-                        </th> --}}
                     </tr>
                 </thead>
             </table>
@@ -136,17 +129,27 @@
                 document.querySelector("[data-address]").innerText = profileData.address || "Tidak Ada Data";
                 document.querySelector("[data-phone]").innerText = profileData.phone || "Tidak Ada Data";
                 document.querySelector("[data-email]").innerText = profileData.email || "Tidak Ada Data";
-                document.querySelector("[data-total-orders]").innerText = profileData.totalOrders || "0";
 
-                // Tampilkan rating
-                const ratingElement = document.querySelector("[data-rating]");
-                // const ratingElement = "3"
-                let ratingHtml = "";
-                for (let i = 1; i <= 5; i++) {
-                    ratingHtml +=
-                        `<i class="fas fa-star ${i <= 3 ? 'text-yellow-500' : 'text-gray-500'}"></i>`;
+                const orderAndRatingSection = document.getElementById("order-rating");
+                // Tampilkan total pesanan hanya jika user.role adalah "penjual"
+                if (profileData.role === "merchant") {
+                    document.querySelector("[data-total-orders]").innerText = profileData.totalOrders || "0";
+
+                    // Tampilkan rating
+                    const ratingElement = document.querySelector("[data-rating]");
+                    let ratingHtml = "";
+                    for (let i = 1; i <= 5; i++) {
+                        ratingHtml +=
+                            `<i class="fas fa-star ${i <= (profileData.rating || 0) ? 'text-yellow-500' : 'text-gray-500'}"></i>`;
+                    }
+                    ratingElement.innerHTML = ratingHtml;
+
+                } else {
+
+                    // Jika bukan merchant, sembunyikan elemen total pesanan dan rating
+                    orderAndRatingSection.style.display = "none";
                 }
-                ratingElement.innerHTML = ratingHtml;
+
             } else {
                 console.log("Data tidak ditemukan di LocalStorage.");
             }

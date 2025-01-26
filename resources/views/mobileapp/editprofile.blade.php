@@ -109,18 +109,19 @@
                 });
                 if (response.ok) {
                     const result = await response.json();
-                    // const updatedLocal = {
-                    //     documentId: userData.documentId,
-                    //     name: document.getElementById('name').value,
-                    //     phone: document.getElementById('phone').value,
-                    //     gender: document.getElementById('gender').value,
-                    //     date_birth: document.getElementById('date_birth').value,
-                    //     address: document.getElementById('address').value,
-                    //     email: userData.email
-                    // };
-                    // localStorage.setItem('user', JSON.stringify(updatedLocal));
+                    const updatedLocal = {
+                        documentId: userData.documentId,
+                        name: document.getElementById('name').value,
+                        phone: document.getElementById('phone').value,
+                        gender: document.getElementById('gender').value,
+                        date_birth: document.getElementById('date_birth').value,
+                        address: document.getElementById('address').value,
+                        email: userData.email,
+                        role: userData.role
+                    };
+                    localStorage.setItem('user', JSON.stringify(updatedLocal));
                     alert("Profil berhasil diperbarui!");
-
+                    window.location.href = "/profilsaya";
                 } else {
                     throw new Error("Gagal memperbarui data pengguna.");
                 }
