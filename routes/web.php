@@ -76,4 +76,6 @@ Route::get('/profilsaya', function () {
     return view('mobileapp.profil');
 });
 
-
+Route::get('/editprofile', function () {
+    return view('mobileapp.editprofile');
+});
