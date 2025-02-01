@@ -19,6 +19,8 @@
             <div class="text-right pr-3">
                 <i class="fas fa-bell text-green-500 text-2xl"></i>
             </div>
+            <span id="cart-count"
+                class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-2">0</span>
         </div>
 
         <!-- Banner Diskon -->
@@ -108,7 +110,7 @@
                     <p id="modalDescription" class="text-gray-600 text-xs mb-3">Deskripsi produk akan ditampilkan di
                         sini.</p>
                 </div>
-                <button onclick="closeModal()"
+                <button id="buyProduct"
                     class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-200">
                     Beli
                 </button>
@@ -118,6 +120,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        let currentProduct = null;
         // Redirect functions
         function redirectToPage() {
             window.location.href = "/dashboardmobile";
@@ -136,14 +139,22 @@
         }
 
         function openModal(item) {
-            const itemModal = item.data.data[0];
+            const itemModal = item.item.data.data[0];
+            console.log(item, 'yg ini');
             const imageItem = itemModal?.picture?.url || "";
             const imageModal = imageItem ? `http://127.0.0.1:1337${imageItem}` : "default-image-url.jpg";
             document.getElementById("modalImage").src = imageModal;
             document.getElementById("modalTitle").innerText = itemModal.name_product;
-            document.getElementById("modalPrice").innerText = `Rp ${itemModal.merchant_product.price}/kg`;
-            document.getElementById("modalDescription").innerText = itemModal.merchant_product.stock;
+            document.getElementById("modalPrice").innerText = `Rp ${item.price}/kg`;
+            document.getElementById("modalDescription").innerText = item.stock;
             document.getElementById("productModal").classList.remove("hidden");
+
+            currentProduct = {
+                id: item.id,
+                name: itemModal.name_product,
+                price: item.price,
+                image: imageModal
+            };
         }
 
         function closeModal() {
@@ -173,12 +184,12 @@
         async function getProducts() {
             const category = document.getElementById('category').value;
             const apiURL =
-                `http://127.0.0.1:1337/api/merchant-products?pagination[page]=${pages}&pagination[pageSize]=${pageSize}&populate=*&filters[product][category][$eq]=${category}&sort=product.name_product:asc`;
+                `http://127.0.0.1:1337/api/merchant-products?pagination[page]=${pages}&pagination[pageSize]=${pageSize}&populate=*&filters[products][category][$eq]=${category}&sort=products.name_product:asc`;
 
             try {
                 const response = await axios.get(apiURL);
                 const data = response.data.data;
-                // console.log(data);
+                console.log(data);
 
                 parentGrid.innerHTML = ""; // Bersihkan grid sebelum mengisi ulang
 
@@ -189,20 +200,22 @@
                 }
 
                 for (const item of data) {
+                    // console.log(item, "yg ini");
                     const apiURLImage =
-                        `http://127.0.0.1:1337/api/products?filters[name_product][$eq]=${item.product.name_product}&populate=*`;
+                        `http://127.0.0.1:1337/api/products?filters[name_product][$eq]=${item.products[0].name_product}&populate=*`;
                     const imageResponse = await axios.get(apiURLImage);
+                    // console.log(imageResponse, 'yg ini');
                     const imageData = imageResponse.data.data[0]?.picture?.url || "";
                     // Ambil URL gambar jika ada
                     const imageURL = imageData ? `http://127.0.0.1:1337${imageData}` : "default-image-url.jpg";
                     parentGrid.innerHTML += `
-                <div class="bg-[#E9F5E9] rounded-lg p-4 cursor-pointer" onclick="openModal(${JSON.stringify(imageResponse).replace(/"/g, '&quot;')})">
+                <div class="bg-[#E9F5E9] rounded-lg p-4 cursor-pointer" onclick="openModal(${JSON.stringify({item:imageResponse, price: item.price, stock: item.stock, id:item.documentId}).replace(/"/g, '&quot;')})">
                     <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg">
-                        <img src="${imageURL}" alt="${item.product.name_product}" class="h-32 w-full object-cover rounded-lg" />
+                        <img src="${imageURL}" alt="${item.products[0].name_product}" class="h-32 w-full object-cover rounded-lg" />
                     </div>
                     <div class="mt-2">
                         <p class="font-bold text-sm text-gray-500 font-lato">
-                            ${item.product.name_product}
+                            ${item.products[0].name_product}
                         </p>
                         <div class="text-[#7A7A7A] text-xs">
                             <p class="font-bold">Rp ${item.price?.toLocaleString()}/kg</p>
@@ -210,8 +223,8 @@
                             <div class="flex items-center">
                                 <span>Rating</span>
                                 ${Array(5).fill('').map((_, i) => `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `).join('')}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `).join('')}
                             </div>
                             <p class="text-xs mt-1">${item.stock}</p>
                         </div>
@@ -224,10 +237,54 @@
             }
         }
 
-        document.getElementById('category').addEventListener('change', getProducts);
+        function getCart() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
 
+        function saveCart(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function addToCart(product) {
+            let cart = getCart();
+            let item = cart.find(item => item.id === product.id);
+            if (item) {
+                item.quantity++;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            saveCart(cart);
+            alert(`${product.name} telah ditambahkan ke keranjang!`);
+        }
+
+        function updateCartCount() {
+            let cart = getCart();
+            let count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = count;
+        }
+
+        document.getElementById('buyProduct').addEventListener('click', function() {
+            if (currentProduct) {
+                addToCart(currentProduct);
+                closeModal();
+            } else {
+                console.error("currentProduct tidak ditemukan!");
+            }
+        });
+
+        document.getElementById('category').addEventListener('change', getProducts);
         // Panggil fungsi saat halaman pertama kali dimuat
-        getProducts();
+        // getProducts();
+        // updateCartCount();
+        // });
+        document.addEventListener('DOMContentLoaded', () => {
+            getProducts();
+            updateCartCount();
+        });
     </script>
 </body>
 
