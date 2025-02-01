@@ -136,10 +136,13 @@
         }
 
         function openModal(item) {
-            document.getElementById("modalImage").src = `http://127.0.0.1:1337${item.product.picture?.url}`;
-            document.getElementById("modalTitle").innerText = item.product.name_product;
-            document.getElementById("modalPrice").innerText = `Rp ${item.price}/kg`;
-            document.getElementById("modalDescription").innerText = item.stock;
+            const itemModal = item.data.data[0];
+            const imageItem = itemModal?.picture?.url || "";
+            const imageModal = imageItem ? `http://127.0.0.1:1337${imageItem}` : "default-image-url.jpg";
+            document.getElementById("modalImage").src = imageModal;
+            document.getElementById("modalTitle").innerText = itemModal.name_product;
+            document.getElementById("modalPrice").innerText = `Rp ${itemModal.merchant_product.price}/kg`;
+            document.getElementById("modalDescription").innerText = itemModal.merchant_product.stock;
             document.getElementById("productModal").classList.remove("hidden");
         }
 
@@ -175,7 +178,7 @@
             try {
                 const response = await axios.get(apiURL);
                 const data = response.data.data;
-                console.log(data);
+                // console.log(data);
 
                 parentGrid.innerHTML = ""; // Bersihkan grid sebelum mengisi ulang
 
@@ -189,14 +192,11 @@
                     const apiURLImage =
                         `http://127.0.0.1:1337/api/products?filters[name_product][$eq]=${item.product.name_product}&populate=*`;
                     const imageResponse = await axios.get(apiURLImage);
-                    console.log(imageResponse)
                     const imageData = imageResponse.data.data[0]?.picture?.url || "";
                     // Ambil URL gambar jika ada
-                    console.log(imageData, 'data')
                     const imageURL = imageData ? `http://127.0.0.1:1337${imageData}` : "default-image-url.jpg";
-
                     parentGrid.innerHTML += `
-                <div class="bg-[#E9F5E9] rounded-lg p-4 cursor-pointer" onclick="openModal(${JSON.stringify(item).replace(/"/g, '&quot;')})">
+                <div class="bg-[#E9F5E9] rounded-lg p-4 cursor-pointer" onclick="openModal(${JSON.stringify(imageResponse).replace(/"/g, '&quot;')})">
                     <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg">
                         <img src="${imageURL}" alt="${item.product.name_product}" class="h-32 w-full object-cover rounded-lg" />
                     </div>
@@ -210,8 +210,8 @@
                             <div class="flex items-center">
                                 <span>Rating</span>
                                 ${Array(5).fill('').map((_, i) => `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    `).join('')}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `).join('')}
                             </div>
                             <p class="text-xs mt-1">${item.stock}</p>
                         </div>
