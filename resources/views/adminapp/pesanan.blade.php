@@ -21,7 +21,7 @@
         </div>
 
          <!-- Banner Diskon -->
-         <div class="bg-white p-5">
+         <!-- <div class="bg-white p-5">
          <div class="bg-green-500 rounded-lg flex items-center justify-between p-4">
             <div class="text-white text-sm">
                 <p class="font-bold">DISKON<br />12.12.2024</p>
@@ -33,65 +33,74 @@
                     class="w-full h-full mt-[-10px]" />
             </div>
         </div>
-        </div>
+        </div> -->
 
         <div class="flex flex-col px-5">
-        <div class="text-right mb-2 ml-auto">
-        <!-- <button class="bg-green-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-green-600 transition">
-            Tambah Produk
-        </button> -->
+        <!-- <div class="text-right mb-2 ml-auto">
         <button class="bg-green-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-green-600 transition" onclick="openModal()">
             Tambah Produk
         </button>
-        </div>
+        </div> -->
 
         <div class="text-left mb-3">
-            <h2 class="text-lg font-bold text-gray-700">Stok Produk</h2>
+            <h2 class="text-lg font-bold text-gray-700">Daftar Pesanan</h2>
         </div>
         </div>
         <div class="bg-green-50 border border-green-300 p-4 rounded-lg ml-4 mr-4 flex items-center justify-between mb-4">
-        <div class="flex items-center space-x-4">
-            <img src="/img/kangkung.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
-            <div>
-            <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
-            <p class="text-xs text-gray-500">100/Ikat</p>
-            <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
+            <div class="flex items-center space-x-4">
+                <img src="/img/kangkung.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
+                    <p class="text-xs text-gray-500">100/Ikat</p>
+                    <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
+                </div>
             </div>
-        </div>
+            <button onclick="showPopup()" class="bg-green-500 text-white px-2 py-1 rounded-lg font-bold hover:bg-green-600 transition ml-auto">
+                Proses
+            </button>
         </div>
         <div class="bg-green-50 border border-green-300 p-4 rounded-lg ml-4 mr-4 flex items-center justify-between mb-4">
-        <div class="flex items-center space-x-4">
-            <img src="/img/kangkung.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
-            <div>
-            <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
-            <p class="text-xs text-gray-500">100/Ikat</p>
-            <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
+            <div class="flex items-center space-x-4">
+                <img src="/img/kangkung.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
+                    <p class="text-xs text-gray-500">100/Ikat</p>
+                    <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
+                </div>
             </div>
-        </div>
+            <button onclick="showPopup()" class="bg-green-500 text-white px-2 py-1 rounded-lg font-bold hover:bg-green-600 transition ml-auto">
+                Proses
+            </button>
         </div>
         <div class="bg-green-50 border border-green-300 p-4 rounded-lg ml-4 mr-4 flex items-center justify-between mb-4">
-        <div class="flex items-center space-x-4">
-            <img src="/img/kangkung.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
-            <div>
-            <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
-            <p class="text-xs text-gray-500">100/Ikat</p>
-            <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
+            <div class="flex items-center space-x-4">
+                <img src="/img/kangkung.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
+                    <p class="text-xs text-gray-500">100/Ikat</p>
+                    <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
+                </div>
             </div>
-        </div>
+            <button onclick="showPopup()" class="bg-green-500 text-white px-2 py-1 rounded-lg font-bold hover:bg-green-600 transition ml-auto">
+                Proses
+            </button>
         </div>
         <div class="bg-green-50 border border-green-300 p-4 rounded-lg ml-4 mr-4 flex items-center justify-between mb-4">
-        <div class="flex items-center space-x-4">
-            <img src="/img/kangkung.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
-            <div>
-            <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
-            <p class="text-xs text-gray-500">100/Ikat</p>
-            <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
+            <div class="flex items-center space-x-4">
+                <img src="/img/kangkung.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
+                    <p class="text-xs text-gray-500">100/Ikat</p>
+                    <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
+                </div>
             </div>
-        </div>
+            <button onclick="showPopup()" class="bg-green-500 text-white px-2 py-1 rounded-lg font-bold hover:bg-green-600 transition ml-auto">
+                Proses
+            </button>
         </div>
         <div class="flex flex-col px-5">
         <div class="text-left mb-3">
-            <h2 class="text-lg font-bold text-gray-700">Pesanan Terbaru</h2>
+            <h2 class="text-lg font-bold text-gray-700">Sudah Diproses</h2>
         </div>
         </div>
         <div class="bg-green-50 border border-green-300 p-4 rounded-lg ml-4 mr-4 flex items-center justify-between mb-4">
@@ -103,8 +112,21 @@
                     <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
                 </div>
             </div>
-            <button onclick="showPopup()" class="bg-green-500 text-white px-2 py-1 rounded-lg font-bold hover:bg-green-600 transition ml-auto">
-                Proses
+            <button onclick="showPopup()" class="bg-yellow-500 text-white px-2 py-1 rounded-lg font-bold hover:bg-yellow-600 transition ml-auto">
+                Dikirim
+            </button>
+        </div>
+        <div class="bg-green-50 border border-green-300 p-4 rounded-lg ml-4 mr-4 flex items-center justify-between mb-4">
+            <div class="flex items-center space-x-4">
+                <img src="/img/kangkung.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
+                    <p class="text-xs text-gray-500">100/Ikat</p>
+                    <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
+                </div>
+            </div>
+            <button onclick="showPopup()" class="bg-red-500 text-white px-2 py-1 rounded-lg font-bold hover:bg-red-600 transition ml-auto">
+                Ditolak
             </button>
         </div>
         <div class="bg-green-50 border border-green-300 p-4 rounded-lg ml-4 mr-4 flex items-center justify-between mb-4">
@@ -117,20 +139,7 @@
                 </div>
             </div>
             <button onclick="showPopup()" class="bg-green-500 text-white px-2 py-1 rounded-lg font-bold hover:bg-green-600 transition ml-auto">
-                Proses
-            </button>
-        </div>
-        <div class="bg-green-50 border border-green-300 p-4 rounded-lg ml-4 mr-4 flex items-center justify-between mb-4">
-            <div class="flex items-center space-x-4">
-                <img src="/img/kangkung.jpg" alt="Produk" class="w-12 h-12 object-cover rounded-lg">
-                <div>
-                    <h3 class="text-sm font-semibold text-gray-800">Sayur Kangkung</h3>
-                    <p class="text-xs text-gray-500">100/Ikat</p>
-                    <p class="text-xs text-green-600 font-bold">Rp 6.200 / Ikat</p>
-                </div>
-            </div>
-            <button onclick="showPopup()" class="bg-green-500 text-white px-2 py-1 rounded-lg font-bold hover:bg-green-600 transition ml-auto">
-                Proses
+                Diterima
             </button>
         </div>
 
@@ -253,16 +262,16 @@
 
 
         <div class="mt-4 flex justify-end space-x-4">
-        <button class="bg-gray-300 text-white px-4 py-2 rounded-lg hover:bg-red-300">Tolak</button>
-        <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Setuju</button>
+            <button class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-red-500">Tolak</button>
+            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Setuju</button>
         </div>
     </div>
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        // Redirect functions
-        function redirectToPage4() {
+          // Redirect functions
+          function redirectToPage4() {
             window.location.href = "/admin/dashboard_admin";
         }
         function redirectToPage5() {
@@ -276,65 +285,6 @@
         }
     </script>
     <script>
-
-        // function openModal(product) {
-        //     document.getElementById("modalImage").src = `http://127.0.0.1:1337${product.picture?.url}`;
-        //     document.getElementById("modalTitle").innerText = product.name_product;
-        //     document.getElementById("modalPrice").innerText = `Rp ${product.price?.toLocaleString()}/kg`;
-        //     document.getElementById("modalDescription").innerText = `Stok Barang: 30`;
-        //     document.getElementById("productModal").classList.remove("hidden");
-        // }
-
-        // function closeModal() {
-        //     document.getElementById("productModal").classList.add("hidden");
-        // }
-
-
-        // function getProducts() {
-        //     const apiURL = `http://127.0.0.1:1337/api/products?pagination[page]=${pages}&pagination[pageSize]=${pageSize}&populate=*&sort=name_product:asc`;
-        //     axios.get(apiURL)
-        //         .then(response => {
-        //             const data = response.data.data;
-        //             parentGrid.innerHTML = "";
-
-        //             if (data.length === 0) {
-        //                 parentGrid.innerHTML = `<p class="text-gray-500 text-center mt-4">Tidak ada produk yang tersedia.</p>`;
-        //             } else {
-        //                 data.forEach(item => {
-        //                     parentGrid.innerHTML += `
-        //                         <div class="bg-[#E9F5E9] rounded-lg p-4 cursor-pointer" onclick="openModal(${JSON.stringify(item).replace(/"/g, '&quot;')})">
-        //                             <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg">
-        //                                 <img src="http://127.0.0.1:1337${item?.picture?.url}"
-        //                                     alt="${item.name_product}"
-        //                                     class="h-32 w-full object-cover rounded-lg" />
-        //                             </div>
-        //                             <div class="mt-2">
-        //                                 <p class="font-bold text-sm text-gray-500 font-lato">
-        //                                     ${item.name_product}
-        //                                 </p>
-        //                                 <div class="text-[#7A7A7A] text-xs">
-        //                                     <p class="font-bold">Rp ${item.price?.toLocaleString()}/kg</p>
-        //                                     <p>Toko Ahmad</p>
-        //                                     <div class="flex items-center">
-        //                                         <span>Rating</span>
-        //                                         ${Array(5).fill('').map((_, i) => `
-        //                                             <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
-        //                                         `).join('')}
-        //                                     </div>
-        //                                     <p class="text-xs mt-1">Stok Barang: 30</p>
-        //                                 </div>
-        //                             </div>
-        //                         </div>
-        //                     `;
-        //                 });
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.error('Error fetching products:', error);
-        //         });
-        // }
-        // getProducts();
-
         function openModal() {
             document.getElementById("productModal").classList.remove("hidden");
         }
