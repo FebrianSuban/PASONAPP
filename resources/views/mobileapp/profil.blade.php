@@ -120,8 +120,11 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
+            if (!sessionStorage.getItem("user")) {
+            // Jika tidak ada, arahkan ke halaman login
+            window.location.href = "/loginmobile";}
             // Ambil data dari LocalStorage
-            const profileData = JSON.parse(localStorage.getItem("user"));
+            const profileData = JSON.parse(sessionStorage.getItem("user"));
 
             if (profileData) {
                 // Masukkan data ke elemen HTML

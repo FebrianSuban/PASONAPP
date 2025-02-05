@@ -209,7 +209,7 @@
                     // Ambil URL gambar jika ada
                     const imageURL = imageData ? `http://127.0.0.1:1337${imageData}` : "default-image-url.jpg";
                     parentGrid.innerHTML += `
-                <div class="bg-[#E9F5E9] rounded-lg p-4 cursor-pointer" onclick="openModal(${JSON.stringify({item:imageResponse, price: item.price, stock: item.stock, id:item.documentId}).replace(/"/g, '&quot;')})">
+                <div class="bg-[#E9F5E9] rounded-lg p-4 cursor-pointer" onclick="openModal(${JSON.stringify({ item: imageResponse, price: item.price, stock: item.stock, id: item.documentId }).replace(/"/g, '&quot;')})">
                     <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg">
                         <img src="${imageURL}" alt="${item.products[0].name_product}" class="h-32 w-full object-cover rounded-lg" />
                     </div>
@@ -223,8 +223,8 @@
                             <div class="flex items-center">
                                 <span>Rating</span>
                                 ${Array(5).fill('').map((_, i) => `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `).join('')}
+                                                                <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
+                                                                `).join('')}
                             </div>
                             <p class="text-xs mt-1">${item.stock}</p>
                         </div>
@@ -238,11 +238,11 @@
         }
 
         function getCart() {
-            return JSON.parse(localStorage.getItem('cart')) || [];
+            return JSON.parse(sessionStorage.getItem('cart')) || [];
         }
 
         function saveCart(cart) {
-            localStorage.setItem('cart', JSON.stringify(cart));
+            sessionStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
         }
 
@@ -278,12 +278,15 @@
 
         document.getElementById('category').addEventListener('change', getProducts);
         // Panggil fungsi saat halaman pertama kali dimuat
-        // getProducts();
-        // updateCartCount();
-        // });
         document.addEventListener('DOMContentLoaded', () => {
-            getProducts();
-            updateCartCount();
+            if (!sessionStorage.getItem("user")) {
+                // Jika tidak ada, arahkan ke halaman login
+                alert("Tolong Login Terlebih Dahulu");
+                window.location.href = "/loginmobile";
+            } else {
+                getProducts();
+                updateCartCount();
+            }
         });
     </script>
 </body>

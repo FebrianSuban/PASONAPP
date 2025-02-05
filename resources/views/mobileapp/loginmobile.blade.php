@@ -43,7 +43,43 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
     <script>
+        async function updateUserLoginStatus(userId, isLogin) {
+            try {
+                const response = await fetch(`http://127.0.0.1:1337/api/userapps/${userId}`, {
+                    method: 'PUT', // Bisa juga pakai PATCH
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        data: {
+                            is_login: isLogin // Mengupdate status login user
+                        }
+                    })
+                });
+
+                const result = await response.json();
+                console.log('Update berhasil:', result);
+                return result;
+            } catch (error) {
+                console.error('Gagal mengupdate data:', error);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
+             // Cek apakah user sudah login berdasarkan sessionStorage
+                const userData = sessionStorage.getItem('user');
+                
+                if (userData) {
+                    const user = JSON.parse(userData);
+                    
+                    // Jika ada user dan is_login bernilai true, alihkan ke dashboard
+                    if (user.is_login) {
+                        alert("Anda Sudah Login")
+                        window.location.href = '/dashboardmobile';
+                    }
+                }
+
             const loginForm = document.getElementById('loginForm');
 
             loginForm.addEventListener('submit', async function (event) {
@@ -87,7 +123,7 @@
                     const storedHash = user.password;
 
                     // Compare password using bcrypt
-                    bcrypt.compare(password, storedHash, function (err, isMatch) {
+                    bcrypt.compare(password, storedHash, async function (err, isMatch) {
                         if (err) {
                             throw new Error('Terjadi kesalahan saat verifikasi password');
                         }
@@ -96,10 +132,23 @@
                             // Successful login
                             console.log('Login successful:', user);
                             alert('Login berhasil!');
-                            // Store user data (except password) in localStorage
-                            const userData = { ...user };
-                            delete userData.password;
-                            localStorage.setItem('user', JSON.stringify(userData));
+                            const response = await fetch(`http://127.0.0.1:1337/api/userapps?filters[email][$eq]=${email}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                            });
+
+                            // Update status login ke API
+                            const update = await updateUserLoginStatus(user.documentId, true);
+    
+                            // Simpan user ke sessionStorage                           
+                            delete update.data.password; // Jangan simpan password
+                            const dataLogin = JSON.stringify(update.data);
+                            sessionStorage.setItem('user', dataLogin);
+
+
                             window.location.href = '/dashboardmobile';
                         } else {
                             alert('Kata sandi salah');
