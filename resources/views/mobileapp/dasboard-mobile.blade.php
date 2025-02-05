@@ -103,7 +103,8 @@
                     <button onclick="closeModal()" class="text-gray-500 text-xl">&times;</button>
                 </div>
                 <div class="text-center">
-                    <img id="modalImage" src="" alt="Product Image" class="rounded-lg w-full h-48 object-cover mb-3" />
+                    <img id="modalImage" src="" alt="Product Image"
+                        class="rounded-lg w-full h-48 object-cover mb-3" />
                     <h3 id="modalTitle" class="font-semibold text-base mb-1">Nama Produk</h3>
                     <p id="modalPrice" class="text-gray-700 text-sm mb-2"></p>
                     <p id="modalDescription" class="text-gray-600 text-xs mb-3">Deskripsi produk akan ditampilkan di
@@ -222,8 +223,8 @@
                             <div class="flex items-center">
                                 <span>Rating</span>
                                 ${Array(5).fill('').map((_, i) => `
-                                <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
-                                `).join('')}
+                                                                <i class="fas fa-star ${i < 4 ? 'text-yellow-500' : 'text-gray-300'} ml-1"></i>
+                                                                `).join('')}
                             </div>
                             <p class="text-xs mt-1">${item.stock}</p>
                         </div>
@@ -266,7 +267,7 @@
             document.getElementById('cart-count').innerText = count;
         }
 
-        document.getElementById('buyProduct').addEventListener('click', function () {
+        document.getElementById('buyProduct').addEventListener('click', function() {
             if (currentProduct) {
                 addToCart(currentProduct);
                 closeModal();
@@ -277,16 +278,12 @@
 
         document.getElementById('category').addEventListener('change', getProducts);
         // Panggil fungsi saat halaman pertama kali dimuat
-        // getProducts();
-        // updateCartCount();
-        // });
         document.addEventListener('DOMContentLoaded', () => {
             if (!sessionStorage.getItem("user")) {
                 // Jika tidak ada, arahkan ke halaman login
                 alert("Tolong Login Terlebih Dahulu");
                 window.location.href = "/loginmobile";
-            }
-            else {
+            } else {
                 getProducts();
                 updateCartCount();
             }
